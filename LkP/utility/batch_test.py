@@ -4,7 +4,7 @@ from utility.parser import parse_args
 from utility.load_data import *
 import heapq
 
-args = parse_args()
+args = parse_args() 
 Ks = eval(args.Ks)
 
 data_generator = Data(path=args.data_path + args.dataset, batch_size=args.batch_size)
