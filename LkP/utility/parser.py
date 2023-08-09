@@ -28,7 +28,7 @@ def parse_args():
     parser.add_argument('--regs', nargs='?', default='[1e-5]',
                         help='Regularizations.')
     parser.add_argument('--lr', type=float, default=0.0001,
-                        help='Learning rate.')
+                        help='Learning rate. 0.001 could be better')
 
     parser.add_argument('--model_type', nargs='?', default='ngcf',
                         help='Specify the name of model (ngcf).')
