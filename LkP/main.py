@@ -7,7 +7,6 @@ from utility.helper import *
 from utility.batch_test import *
 import pickle as cPickle
 import torch.nn.functional as F
-from time import time
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -48,7 +47,6 @@ if __name__ == '__main__':
         
     loss_loger, rec_loger, ndcg_loger,  cc_loger = [], [], [], []
     for epoch in range(args.epoch):
-        t1 = time()
         if args.dpp_loss != 0:
             batch_kernel = torch.zeros(args.batch_size, args.k_size, args.k_size) #for batch
             batch_nkernel = torch.zeros(args.batch_size, args.k_size, args.k_size)
@@ -78,7 +76,7 @@ if __name__ == '__main__':
                 
                     batch_kernel[n] = gen_kernel    
                     batch_lkernel[n] = cond_kernel
-                '''
+                
                 dpp_loss = model.create_kdpp_loss(u_g_embeddings.unsqueeze(1),
                                                  pos_i_g_embeddings,
                                                  neg_i_g_embeddings,
@@ -92,6 +90,7 @@ if __name__ == '__main__':
                                                  batch_kernel.to(args.device), 
                                                  batch_lkernel.to(args.device),
                                                  up_diag, K)
+                '''
                                                  
                 optimizer.zero_grad()
                 dpp_loss.backward()
@@ -138,15 +137,15 @@ if __name__ == '__main__':
         if epoch < 201:        
             if (epoch + 1) % 40 != 0:
                 if args.verbose > 0 and epoch % args.verbose == 0:
-                    perf_str = 'Epoch %d [%.1fs]: train==[%.5f=%.5f + %.5f]' % (
-                        epoch, time() - t1, loss, mf_loss, emb_loss)
+                    perf_str = 'Epoch %d: train==[%.5f=%.5f + %.5f]' % (
+                        epoch, loss, mf_loss, emb_loss)
                     print(perf_str)
                 continue
         else:
             if (epoch + 1) % 20 != 0:
                 if args.verbose > 0 and epoch % args.verbose == 0:
-                    perf_str = 'Epoch %d [%.1fs]: train==[%.5f=%.5f + %.5f]' % (
-                        epoch, time() - t1, loss, mf_loss, emb_loss)
+                    perf_str = 'Epoch %d: train==[%.5f=%.5f + %.5f]' % (
+                        epoch, loss, mf_loss, emb_loss)
                     print(perf_str)
                 continue
 
