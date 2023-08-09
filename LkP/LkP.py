@@ -2,7 +2,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import numpy as np
+import numpy as np 
 
 class LkP(nn.Module):
     def __init__(self, n_user, n_item, norm_adj, args):
