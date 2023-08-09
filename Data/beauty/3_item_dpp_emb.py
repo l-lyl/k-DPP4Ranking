@@ -15,7 +15,7 @@ import torch
 ####################################
 
 t0 = time.time()
-path = '../anime-1/'
+path = '../beauty/'
 
 np.random.seed(0)
 '''
