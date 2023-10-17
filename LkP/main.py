@@ -25,7 +25,6 @@ if __name__ == '__main__':
                  norm_adj,
                  args).to(args.device)
     
-    t0 = time()
     cur_best_pre_0, stopping_step = 0, 0
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
     
